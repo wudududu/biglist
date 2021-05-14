@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    * {
+      padding: 0px;
+      margin: 0px;
+      box-sizing: border-box;
+    }
+    #ctr {
+      height: 500px;
+      overflow: scroll;
+    }
+    #ctr p {
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+    }
+  </style>
+  <body>
+    <div id="ctr">
+    </div>
+  </body>
+  <script src="./index.js"></script>
+  <script>
+    let num = 1000000;
+    let data = [];
+    for (let i = 0; i < num; i++) {
+      data.push(i)
+    }
+    // 渲染
+    let ctr = document.querySelector("#ctr");
+    let phT = document.createElement("div");
+    let phB = document.createElement("div");
+
+    phT.className = "phT";
+    phB.className = "phB";
+    
+    let res = heightPage({
+      data,
+      pageSize: 20,
+      itemH: 30,
+      container: ctr
+    })
+
+    // 拼接html串
+    let phtStr = `<div style="height:${res.phTop}px"></div>`
+    let phbStr = `<div style="height:${res.phBottom}px"></div>`
+    let content = "";
+    res.renderList.forEach(l => {
+      content += `<p>${l}</p>`
+    })
+
+    ctr.innerHTML = phtStr + content + phbStr;
+  </script>
+</html>
